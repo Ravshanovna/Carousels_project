@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import Axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux'
 
 const Aksesuar = () => {
 
+  const dispatch = useDispatch()
     const [mass, setMass] = useState([])
 
 
@@ -14,6 +16,7 @@ const Aksesuar = () => {
       function getVal() {
         Axios.get('https://api.npoint.io/b48b242cad2dd8799684')
         .then(ress => {
+          dispatch({type: 'added', payload: {mass: ress.data}})
           setMass(ress.data)
         })
       }

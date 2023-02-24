@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import Axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const Kiyim = () => {
     const [mass, setMass] = useState([])
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -13,6 +15,7 @@ const Kiyim = () => {
       function getVal() {
         Axios.get('https://api.npoint.io/86d9dc87373f1e20271d')
         .then(ress => {
+            dispatch({type: 'added2', payload: {mass: ress.data}})
           setMass(ress.data)
         })
       }
